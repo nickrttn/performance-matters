@@ -1,0 +1,33 @@
+{
+  "name": "performance-matters",
+  "version": "1.0.0",
+  "description": "Explore the art of the Rijksmuseum, fast.",
+  "main": "server.js",
+  "scripts": {
+    "test": "xo",
+    "start": "node server.js",
+    "start-dev": "nodemon server.js",
+    "lint": "xo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickrttn/performance-matters.git"
+  },
+  "author": "Nick Rutten <hello@nickrttn.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nickrttn/performance-matters/issues"
+  },
+  "homepage": "https://github.com/nickrttn/performance-matters#readme",
+  "dependencies": {
+    "compression": "^1.6.2",
+    "concat-stream": "^1.6.0",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "express-paginate": "^0.2.2"
+  },
+  "devDependencies": {
+    "xo": "^0.18.0"
+  }
+}

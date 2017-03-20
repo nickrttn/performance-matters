@@ -1,0 +1,20 @@
+@font-face {
+	font-family: 'Fira Sans';
+	src: url(../fonts/FiraSans-Light.woff2) format('woff2');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Fira Sans';
+	src: url(../fonts/FiraSans-LightItalic.woff2) format('woff2');
+	font-weight: 300;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Fira Sans';
+	src: url(../fonts/FiraSans-SemiBold.woff2) format('woff2');
+	font-weight: 600;
+	font-style: normal;
+}
