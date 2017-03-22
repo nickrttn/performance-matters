@@ -3,6 +3,7 @@ const compression = require('compression');
 
 const collection = require('./routers/collection');
 const detail = require('./routers/detail');
+const api = require('./routers/api');
 
 require('dotenv').config();
 
@@ -20,5 +21,6 @@ app.get('/', (request, response) => {
 
 app.use('/collection', collection);
 app.use('/artwork/', detail);
+app.use('/api/', api);
 
 app.listen(3000);
