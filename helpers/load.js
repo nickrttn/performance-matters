@@ -1,16 +1,28 @@
 const https = require('https');
 const concat = require('concat-stream');
+const PouchDB = require('pouchdb');
 
-module.exports = function (url, callback) {
-	https.get(url, res => {
-		const onend = buffer => {
-			callback(JSON.parse(buffer));
-		};
+const db = new PouchDB('collection');
 
-		res.on('error', error).pipe(concat(onend));
-	});
+module.exports = async (url, callback) => {
+	try {
+		const response = await db.get(url);
+		await callback(response.data);
+	} catch (err) {
+		https.get(url, res => {
+			res.on('error', err => {
+				throw new Error(err);
+			}).pipe(concat(onend));
 
-	function error(error) {
-		console.warn(error);
+			async function onend(buffer) {
+				try {
+					const data = JSON.parse(buffer);
+					await db.put({_id: url, data});
+					callback(data);
+				} catch (error) {
+					throw new Error(error);
+				}
+			}
+		});
 	}
 };

@@ -25,7 +25,8 @@
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
-    "express-paginate": "^0.2.2"
+    "express-paginate": "^0.2.2",
+    "pouchdb": "^6.1.2"
   },
   "devDependencies": {
     "xo": "^0.18.0"
