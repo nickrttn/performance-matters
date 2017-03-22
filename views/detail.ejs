@@ -1,6 +1,7 @@
 <%- include('app/head') %>
 
 <article data-section="detail">
+	<a href="<%= back %>">Go back to the collection</a>
 	<img src="<%= object.webImage.url %>" alt="<%= object.longTitle %>" data-guid="<%= object.webImage.guid %>">
 	<h1><%= object.longTitle %></h1>
 	<p><%= object.label.description %></p>
