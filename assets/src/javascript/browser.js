@@ -53,10 +53,7 @@ function renderNav(href) {
 		const span = node.querySelector('span');
 		const text = span ? span.textContent : 'Previous works of art';
 
-		url.searchParams.set(
-			'page',
-			parseInt(url.searchParams.get('page')) + modifier
-		);
+		url.searchParams.set('page', parseInt(url.searchParams.get('page')) + modifier);
 
 		const newNode = h('nav', {
 			key: node.dataset.paginate,

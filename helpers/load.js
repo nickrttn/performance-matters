@@ -1,5 +1,4 @@
 const request = require('superagent');
-const concat = require('concat-stream');
 const PouchDB = require('pouchdb');
 
 const db = new PouchDB('collection');
@@ -16,7 +15,7 @@ module.exports = function (url, callback) {
 
 	function sanitize(data) {
 		if (Object.prototype.hasOwnProperty.call(data, 'artObjects')) {
-			data.artObjects = data.artObjects.filter(object => object.hasImage && object.headerImage);
+			data.artObjects = data.artObjects.filter(object => object.headerImage);
 			data.artObjects = data.artObjects.map(object => ({
 				id: object.id,
 				objectNumber: object.objectNumber,

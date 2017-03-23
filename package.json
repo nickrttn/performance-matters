@@ -6,7 +6,8 @@
   "scripts": {
     "test": "xo",
     "start": "node server.js",
-    "start-dev": "nodemon server.js --inspect",
+    "debug": "node server.js --debug",
+    "start-dev": "nodemon server.js",
     "lint": "xo",
     "build": "browserify assets/src/javascript/browser.js -t babelify -o assets/build/browser.js",
     "watch": "watchify assets/src/javascript/browser.js -t babelify -o assets/build/browser.js"
