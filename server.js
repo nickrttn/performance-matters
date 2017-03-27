@@ -21,7 +21,7 @@ app.use('/collection', collection);
 app.use('/artwork/', detail);
 app.use('/api/', api);
 
-const port = process.env.NODE_ENV === production ? 80 : 3000;
+const port = process.env.NODE_ENV === 'production' ? 80 : 3000;
 
 console.log(port);
 
