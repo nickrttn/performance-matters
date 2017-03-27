@@ -4,6 +4,11 @@ const diff = require('virtual-dom/diff');
 const patch = require('virtual-dom/patch');
 const load = require('../../../helpers/load');
 
+// Before anything else, register the Service Worker
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('/sw.js');
+}
+
 const paginationLinks = document.querySelectorAll('[data-paginate] a');
 let pageNode = document.querySelector('[data-page]');
 

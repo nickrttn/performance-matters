@@ -9,8 +9,8 @@
     "debug": "node server.js --debug",
     "start-dev": "nodemon server.js",
     "lint": "xo",
-    "build": "browserify assets/src/javascript/browser.js -t babelify -o assets/build/browser.js",
-    "watch": "watchify assets/src/javascript/browser.js -t babelify -o assets/build/browser.js"
+    "build": "browserify assets/src/javascript/browser.js -t babelify -g uglifyify -o assets/build/browser.js",
+    "watch": "watchify assets/src/javascript/browser.js -t babelify -g uglifyify -o assets/build/browser.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,9 @@
   },
   "devDependencies": {
     "babel-preset-env": "^1.2.2",
+    "browserify": "^14.1.0",
+    "uglify-js": "^2.8.16",
+    "uglify-to-browserify": "^1.0.2",
     "watchify": "^3.9.0",
     "xo": "^0.18.0"
   },
