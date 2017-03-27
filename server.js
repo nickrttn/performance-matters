@@ -23,4 +23,6 @@ app.use('/collection', collection);
 app.use('/artwork/', detail);
 app.use('/api/', api);
 
-app.listen(app.get('port'));
+app.listen(app.get('port'), () => {
+	console.log(`Application running on port ${app.get('port')}`);
+});
