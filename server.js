@@ -5,18 +5,25 @@ const collection = require('./routers/collection');
 const detail = require('./routers/detail');
 const api = require('./routers/api');
 
+const head = require('./views/app/head');
+const index = require('./views/index');
+const foot = require('./views/app/foot');
+
 const app = express();
 
 app.set('port', (process.env.PORT || 3000));
-
 app.set('views', './views');
-app.set('view engine', 'ejs');
 
 app.use(compression());
 app.use(express.static('assets', {maxAge: '31d'}));
 
 app.get('/', (request, response) => {
-	response.render('index');
+	response.type('.html');
+	response.end(`
+		${head}
+		${index}
+		${foot}
+	`);
 });
 
 app.use('/collection', collection);

@@ -1,6 +1,11 @@
 const express = require('express');
 const paginate = require('express-paginate');
 const load = require('../helpers/load');
+const toString = require('vdom-to-html');
+
+const head = require('../views/app/head');
+const render = require('../views/collection');
+const foot = require('../views/app/foot');
 
 require('dotenv').config();
 
@@ -22,15 +27,16 @@ router.all((request, response, next) => {
 router.get('/', (request, response) => {
 	const page = request.query.page;
 	const limit = request.query.limit;
-
+	const url = `${endpoint}?key=${apiKey}&ps=${limit}&p=${page - 1}&format=json&imgonly=true`;
 	const callback = data => {
-		response.render('collection', {
-			page,
-			collection: data.artObjects.filter(object => Boolean(object.headerImage))
-		});
+		response.type('.html');
+		response.end(`
+			${head}
+			${toString(render(data, response.locals.paginate))}
+			${foot}
+		`);
 	};
 
-	const url = `${endpoint}?key=${apiKey}&ps=${limit}&p=${page - 1}&format=json&imgonly=true`;
 	load(url, callback);
 });
 

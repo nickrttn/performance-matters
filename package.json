@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/nickrttn/performance-matters/issues"
   },
-	"engines": {
+  "engines": {
     "node": "7.7.3"
   },
   "homepage": "https://github.com/nickrttn/performance-matters#readme",
@@ -35,6 +35,7 @@
     "express-paginate": "^0.2.2",
     "pouchdb": "^6.1.2",
     "superagent": "^3.5.1",
+    "vdom-to-html": "^2.3.1",
     "virtual-dom": "^2.1.1"
   },
   "devDependencies": {

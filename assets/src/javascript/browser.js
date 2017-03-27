@@ -1,8 +1,10 @@
-const delegator = require('dom-delegator')();
-const h = require("virtual-dom/h");
+const h = require('virtual-dom/h');
 const diff = require('virtual-dom/diff');
 const patch = require('virtual-dom/patch');
+
 const load = require('../../../helpers/load');
+const nav = require('../../../views/nav');
+const page = require('../../../views/page');
 
 // Before anything else, register the Service Worker
 if ('serviceWorker' in navigator) {
@@ -10,33 +12,30 @@ if ('serviceWorker' in navigator) {
 }
 
 const paginationLinks = document.querySelectorAll('[data-paginate] a');
-let pageNode = document.querySelector('[data-page]');
-
-Array.from(paginationLinks).forEach(link => link.addEventListener('click', onpage));
+paginationLinks.forEach(link => link.addEventListener('click', onpage));
 
 function onpage(event) {
-	event.preventDefault();
-	const currentHref = event.currentTarget.href;
-	const apiURL = new URL(currentHref);
+	const targetHref = new URL(event.currentTarget.href);
+	const params = targetHref.searchParams;
+
+	const apiURL = new URL(targetHref);
 	apiURL.pathname = '/api';
+
 	load(apiURL.toString(), render);
 
 	function render(response) {
-		const params = apiURL.searchParams;
 		if (Object.prototype.hasOwnProperty.call(response, 'artObjects')) {
-			const newPageNode = h('div', {
-				key: 'page',
-				dataset: {
-					page: params.get('page')
-				}
-			}, response.artObjects.map(renderObject));
+			let pageNode = document.querySelector('[data-page]');
+			const newPageNode = page(response, params.get('page'));
 			const patches = diff(pageNode, newPageNode);
 			pageNode = patch(pageNode, patches);
-			changeState(currentHref);
+			changeState(targetHref);
 		} else if (Object.prototype.hasOwnProperty.call(response, 'artObject')) {
 			console.log(response);
 		}
 	}
+
+	event.preventDefault();
 }
 
 function changeState(href) {
@@ -44,29 +43,18 @@ function changeState(href) {
 	renderNav(href);
 }
 
-function renderObject(object) {
-	return h('article', {dataset: {object: object.id}}, [
-		h('h2', [h('a', {href: `/artwork/${object.objectNumber}`}, object.title)]),
-		h('img', {src: object.headerImage.url, alt: object.longTitle, dataset: {guid: object.headerImage.guid}})
-	]);
-}
-
 function renderNav(href) {
 	document.querySelectorAll('[data-paginate]').forEach(node => {
 		const url = new URL(href);
 		const modifier = node.dataset.paginate === 'next' ? 1 : -1;
-		const span = node.querySelector('span');
-		const text = span ? span.textContent : 'Previous works of art';
+		const page = parseInt(url.searchParams.get('page'));
+		url.searchParams.set('page', page + modifier);
 
-		url.searchParams.set('page', parseInt(url.searchParams.get('page')) + modifier);
-
-		const newNode = h('nav', {
-			key: node.dataset.paginate,
-			dataset: {paginate: node.dataset.paginate}}, [
-				h('a', {href: url.toString(), 'ev-click': onpage}, [
-					h('span', text)
-				])
-			]
+		const newNode = nav(
+			url.toString(),
+			node.dataset.paginate,
+			page,
+			onpage
 		);
 
 		const patches = diff(node, newNode);
