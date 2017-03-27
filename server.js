@@ -5,8 +5,6 @@ const collection = require('./routers/collection');
 const detail = require('./routers/detail');
 const api = require('./routers/api');
 
-require('dotenv').config();
-
 const app = express();
 
 app.set('views', './views');
@@ -23,4 +21,8 @@ app.use('/collection', collection);
 app.use('/artwork/', detail);
 app.use('/api/', api);
 
-app.listen(3000);
+const port = process.env.PRODUCTION ? 80 : 3000;
+
+console.log(port);
+
+app.listen(port);
