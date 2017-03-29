@@ -1,13 +1,8 @@
 self.addEventListener('install', event => {
-	// Delete all caches
 	event.waitUntil(
-		caches.keys()
-			.then(keys => Promise.all(keys.map(key => caches.delete(key))))
-	);
-
-	event.waitUntil(
-		caches.open('erm-v1')
+		caches.open('erm-core-v1')
 			.then(cache => cache.addAll([
+				'/offline',
 				'/collection',
 				'/src/fonts/FiraSans-Light.woff2',
 				'src/fonts/FiraSans-LightItalic.woff2',
@@ -21,27 +16,38 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', event => {
-	const path = new URL(event.request.url).pathname;
-	if (path === '/collection' || path === '/api') {
+	if (event.request.mode === 'navigate') {
 		event.respondWith(
 			fetch(event.request)
-				.then(response => toCache(event.request, response))
-				.catch(() => fromCache(event.request))
+				.then(response => toPageCache(event.request, response))
+				.catch(() => fromPageCache(event.request))
+				.catch(() => fromCoreCache('/offline'))
 		);
 	} else {
-		event.respondWith(fetch(event.request));
+		event.respondWith(
+			fetch(event.request)
+				.catch(() => fromPageCache(event.request))
+				.catch(() => fromCoreCache('/offline'))
+		);
 	}
 });
 
-function fromCache(request) {
-	return caches.open('erm-v1')
+function fromCoreCache(url) {
+	return caches.open('erm-core-v1')
+		.then(cache => cache.match(url))
+		.then(response => response ? response : Promise.reject());
+}
+
+function fromPageCache(request) {
+	return caches.open('erm-cache-v1')
 		.then(cache => cache.match(request))
 		.then(response => response ? response : Promise.reject());
 }
 
-function toCache(request, response) {
+function toPageCache(request, response) {
 	const clone = response.clone();
-	caches.open('erm-v1')
+	caches.open('erm-cache-v1')
 		.then(cache => cache.put(request, clone));
+
 	return response;
 }

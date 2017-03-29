@@ -8,7 +8,7 @@ const h = require('virtual-dom/h');
 function artObject(object, index) {
 	return h('article', {key: index, dataset: {object: object.id}}, [
 		h('h2', [h('a', {href: `/artwork/${object.objectNumber}`}, object.title)]),
-		h('img', {src: object.headerImage.url, alt: object.longTitle, dataset: {guid: object.headerImage.guid}})
+		h('img', {src: object.headerImage.url.replace('http', 'https'), alt: object.longTitle, dataset: {guid: object.headerImage.guid}})
 	]);
 }
 

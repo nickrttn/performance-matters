@@ -19,7 +19,7 @@ function offline(request, response) {
 	response.type('.html');
 	response.end(`
 		${head}
-		${toString(render())}
+		${render()}
 		${foot}
 	`)
 }

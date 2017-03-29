@@ -8,7 +8,7 @@ function detail(collectionURL, object) {
 		}}, [
 			h('a', {href: collectionURL}, 'Go back to the collection'),
 			h('img', {
-				src: object.webImage.url,
+				src: object.webImage.url.replace('http', 'https'),
 				alt: object.longTitle,
 				dataset: {
 					guid: object.webImage.guid
