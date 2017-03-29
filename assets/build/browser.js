@@ -190,7 +190,7 @@ function hiddenStore(e,t){var r={identity:t},n=e.valueOf;return Object.definePro
 },{}],66:[function(require,module,exports){
 function isArray(r){return"[object Array]"===toString.call(r)}var nativeIsArray=Array.isArray,toString=Object.prototype.toString;module.exports=nativeIsArray||isArray;
 },{}],67:[function(require,module,exports){
-"use strict";function artObject(e){return h("article",{dataset:{object:e.id}},[h("h2",[h("a",{href:"/artwork/"+e.objectNumber},e.title)]),h("img",{src:e.headerImage.url,alt:e.longTitle,dataset:{guid:e.headerImage.guid}})])}var h=require("virtual-dom/h");module.exports=artObject;
+"use strict";function artObject(e,t){return h("article",{key:t,dataset:{object:e.id}},[h("h2",[h("a",{href:"/artwork/"+e.objectNumber},e.title)]),h("img",{src:e.headerImage.url,alt:e.longTitle,dataset:{guid:e.headerImage.guid}})])}var h=require("virtual-dom/h");module.exports=artObject;
 
 },{"virtual-dom/h":39}],68:[function(require,module,exports){
 "use strict";function nav(r,e,a,o){var t="prev"===e?"Previous works of art":"More works of art";return h("nav",{key:e,dataset:{paginate:e}},a<=1&&"prev"===e?"":h("a",{href:r,"ev-click":o?o:null},h("span",t)))}var delegator=require("dom-delegator")(),h=require("virtual-dom/h");module.exports=nav;
