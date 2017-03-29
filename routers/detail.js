@@ -1,5 +1,10 @@
 const express = require('express');
+const toString = require('vdom-to-html');
+
 const load = require('../helpers/load');
+const head = require('../views/app/head');
+const render = require('../views/detail');
+const foot = require('../views/app/foot');
 
 require('dotenv').config();
 
@@ -12,10 +17,15 @@ router.get('/:artwork', artwork);
 
 function artwork(request, response) {
 	const id = request.params.artwork;
-	const back = request.headers.referer;
+	const collectionURL = request.headers.referer;
 
 	const callback = data => {
-		response.render('detail', {object: data.artObject, back});
+		response.type('.html');
+		response.end(`
+			${head}
+			${toString(render(collectionURL, data.artObject))}
+			${foot}
+		`)
 	};
 
 	const url = `${endpoint}/${id}?key=${apiKey}&format=json&imgonly=true`;

@@ -1,8 +1,8 @@
 const express = require('express');
 const paginate = require('express-paginate');
-const load = require('../helpers/load');
 const toString = require('vdom-to-html');
 
+const load = require('../helpers/load');
 const head = require('../views/app/head');
 const render = require('../views/collection');
 const foot = require('../views/app/foot');
