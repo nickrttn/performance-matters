@@ -58,6 +58,7 @@ a {
 }
 
 [data-section="root"] {
+	flex: 1;
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: flex-end;
@@ -67,45 +68,63 @@ a {
 
 [data-section="collection"] {
 	display: flex;
-	flex-flow: row nowrap;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+	height: 100vh;
 	max-height: 100vh;
 	max-width: 100%;
+}
+
+@media screen and (min-width: 62.5em) {
+	[data-section="collection"] {
+		flex-flow: row nowrap;
+	}
 }
 
 [data-page] {
 	display: flex;
 	flex-flow: row wrap;
-	max-height: calc(100vh - 12vh);
+	max-height: calc(100vh - 6em);
+	flex: 1;
 }
 
 @media screen and (min-width: 62.5em) {
 	[data-page] {
 		flex-flow: column wrap;
 		overflow-y: scroll;
-		height: 100vh;
 		max-height: 100vh;
+		max-width: calc(100vw - 6em);
 	}
 }
 
 [data-object] {
-	max-width: 50vw;
+	flex: 1 50vw;
 	position: relative;
 	overflow: hidden;
-	max-height: calc((100vh - 12vh) / 5);
+	padding-bottom: calc((100vh - 6em) / 5);
+	max-width: 50vw;
+	height: 0;
+	background-image: url('../images/placeholder.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 @media screen and (min-width: 62.5em) {
 	[data-object] {
-		max-width: calc((100vw - 8vmax) / 2);
-		max-height: calc(100vh  / 5);
+		flex: 0;
+		max-width: calc((100vw - 6em) / 2);
+		height: 0;
+		padding-bottom: calc(100vh  / 5);
 	}
 }
 
 [data-object] img {
+	position: absolute;
+	top: 0; left: 0;
 	display: block;
 	object-fit: cover;
-	height: 100%;
-	width: auto;
+	min-height: 100%;
+	min-width: 100%;
 }
 
 [data-object] h2 {
@@ -116,6 +135,7 @@ a {
 	font-size: 0.9em;
 	font-weight: 600;
 	background: #b2b2b2;
+	z-index: 1;
 }
 
 [data-object] a {
@@ -132,6 +152,7 @@ a {
 [data-paginate] {
 	background-color: #222;
 	width: 100vw;
+	height: 3em;
 }
 
 [data-paginate] a {

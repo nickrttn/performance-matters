@@ -14,7 +14,7 @@ module.exports = `
 		<link rel="preload" href="/src/fonts/FiraSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
 
 		<link rel="stylesheet" href="/src/css/fonts.css">
-		<link rel="stylesheet" href="/build/main.css">
+		<link rel="stylesheet" href="/src/css/main.css">
 
 		<script src="/build/browser.js" async defer></script>
 	</head>
