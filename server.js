@@ -4,6 +4,7 @@ const compression = require('compression');
 const collection = require('./routers/collection');
 const detail = require('./routers/detail');
 const api = require('./routers/api');
+const offline = require('./routers/offline');
 
 const head = require('./views/app/head');
 const index = require('./views/index');
@@ -29,6 +30,7 @@ app.get('/', (request, response) => {
 app.use('/collection', collection);
 app.use('/artwork/', detail);
 app.use('/api/', api);
+app.use('/offline/', offline);
 
 app.listen(app.get('port'), () => {
 	console.log(`Application running on port ${app.get('port')}`);

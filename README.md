@@ -1,6 +1,6 @@
 # Discover the art collection of the Rijksmuseum
 
-This progressive web application enables users to explore the art collection of the Rijksmuseum very fast. A live version of the application is available at [tranquil-citadel-84132.herokuapp.com](https://tranquil-citadel-84132.herokuapp.com).
+This progressive web application enables users to explore the art collection of the Rijksmuseum very fast. A live version of the application is available at [https://young-retreat-48855.herokuapp.com/](https://young-retreat-48855.herokuapp.com/).
 
 ## Up and running
 

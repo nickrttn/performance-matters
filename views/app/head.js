@@ -9,9 +9,9 @@ module.exports = `
 
 		<link rel="manifest" href="/manifest.json">
 
-		<link rel="preload" href="/src/fonts/FiraSans-Light.woff2" as="font" type="font/woff2" crossorigin>
-		<link rel="preload" href="/src/fonts/FiraSans-LightItalic.woff2" as="font" type="font/woff2" crossorigin>
-		<link rel="preload" href="/src/fonts/FiraSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="/src/fonts/FiraSans-Light.woff2" as="font" type="font/woff2">
+		<link rel="preload" href="/src/fonts/FiraSans-LightItalic.woff2" as="font" type="font/woff2">
+		<link rel="preload" href="/src/fonts/FiraSans-SemiBold.woff2" as="font" type="font/woff2">
 
 		<link rel="stylesheet" href="/src/css/fonts.css">
 		<link rel="stylesheet" href="/build/main.css">
