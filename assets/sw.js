@@ -13,7 +13,7 @@ self.addEventListener('install', event => {
 				'src/fonts/FiraSans-LightItalic.woff2',
 				'src/fonts/FiraSans-SemiBold.woff2',
 				'/src/css/fonts.css',
-				'/src/css/main.css',
+				'/build/main.css',
 				'/build/browser.js'
 			]))
 			.then(self.skipWaiting())
