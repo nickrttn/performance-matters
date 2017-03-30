@@ -5,26 +5,26 @@ This progressive web application enables users to explore the art collection of 
 ## Up and running
 
 1. Clone the repo
-
-`git clone https://github.com/nickrttn/performance-matters && cd performance-matters`
+	`git clone https://github.com/nickrttn/performance-matters && cd performance-matters`
 
 
 2. Install the dependencies
-
-`npm install`
+	`npm install`
 
 3. Build the client-side assets
-
-`npm run build`
+	- `npm run build`
+	- `npm run build-css`
+	- `npm run build-critical-css`
 
 4. Finally, start the server
-
-`npm run start`
+	`npm run start`
 
 ## Features
 
 - Client-side rendering with [virtual-dom](https://www.npmjs.com/package/virtual-dom)
 - A no-JavaScript server-side rendered fallback.
-- JSON caching in IndexedDB
+- Requested data is cached in IndexedDB
 - Request preloading and asset caching in a Service Worker
-- Isomorphic data fetching library
+- Universal data fetching
+- Universal rendering
+- Universal caching
