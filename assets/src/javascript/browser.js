@@ -1,24 +1,41 @@
+'use strict';
+
+const createElement = require('virtual-dom/create-element');
+const h = require('virtual-dom/h');
 const diff = require('virtual-dom/diff');
 const patch = require('virtual-dom/patch');
 
 const load = require('../../../helpers/load');
 const nav = require('../../../views/nav');
 const page = require('../../../views/page');
+const detail = require('../../../views/detail');
 
 // Before anything else, register the Service Worker
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/sw.js');
 }
 
-const paginationLinks = document.querySelectorAll('[data-paginate] a');
-paginationLinks.forEach(link => link.addEventListener('click', onpage));
+const collection = document.querySelector('[data-section="collection"]');
+
+attachListeners();
+
+function attachListeners() {
+	if (Boolean(collection)) {
+		Array.from(document.links).forEach(link => link.addEventListener('click', onpage));
+	}
+}
 
 function onpage(event) {
 	const targetHref = new URL(event.currentTarget.href);
 	const params = targetHref.searchParams;
 
 	const apiURL = new URL(targetHref);
-	apiURL.pathname = '/api';
+
+	if (params.get('artwork')) {
+		apiURL.pathname = '/api/detail';
+	} else {
+		apiURL.pathname = '/api';
+	}
 
 	load(apiURL.toString(), render);
 
@@ -31,8 +48,19 @@ function onpage(event) {
 
 			changeState(targetHref);
 			renderNav(targetHref);
+			attachListeners();
 		} else if (has.call(response, 'artObject')) {
-			console.log(response);
+			const wrapper = createElement(h(
+				'section',
+				{
+					dataset: {
+						section: 'wrapper'
+					}
+				},
+				detail(response.back, response.artObject, onclose)
+			));
+			document.body.insertAdjacentElement('afterbegin', wrapper);
+			changeState(targetHref);
 		}
 	}
 
@@ -59,4 +87,26 @@ function renderNav(href) {
 
 		patch(node, diff(node, newNode));
 	});
+}
+
+function onclose(event) {
+	event.preventDefault();
+	changeState(event.currentTarget.href);
+
+	const wrapper = document.querySelector('[data-section="wrapper"]');
+
+	wrapper.addEventListener('animationend', remove, {passive: true});
+
+	function remove() {
+		wrapper.removeEventListener('animationend', remove);
+		wrapper.remove();
+	}
+
+	wrapper.style.animationPlayState = 'paused';
+
+	// Wait for 8 ms after setting animationPlayState to trigger the animation
+	setTimeout(() => {
+		wrapper.classList.add('out');
+		wrapper.style.animationPlayState = 'running';
+	}, 8);
 }

@@ -13,10 +13,10 @@ const router = express.Router(); // eslint-disable-line new-cap
 const endpoint = process.env.RIJKSMUSEUM_ENDPOINT;
 const apiKey = process.env.RIJKSMUSEUM_APIKEY;
 
-router.get('/:artwork', artwork);
+router.get('/', artwork);
 
 function artwork(request, response) {
-	const id = request.params.artwork;
+	const id = request.query.artwork;
 	const collectionURL = request.headers.referer;
 
 	const callback = data => {

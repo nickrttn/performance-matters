@@ -8,7 +8,7 @@ html {
 }
 
 body {
-	font-family: 'Fira Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
 	font-weight: 300;
 	line-height: 1.5;
 	background: #111;
@@ -188,12 +188,25 @@ a {
 	}
 }
 
-[data-section="detail"] {
+[data-section="wrapper"] {
+	position: fixed;
+	top: 0; left: 0;
+	width: 100vw;
+	background-color: rgba(22, 22, 22, 0.8);
+	padding: 0 10vw;
+	z-index: 3;
+	overflow: scroll;
+	animation: 200ms fade ease-in forwards;
 }
 
-[data-section="detail"] [data-guid] {
-	/*max-height: 70vh;
-	width: auto;*/
+[data-section="wrapper"].out {
+	animation: 300ms fade ease-out forwards reverse;
+}
+
+[data-section="detail"] {
+	filter: none;
+	background-color: black;
+	padding-bottom: 3em;
 }
 
 [data-section="detail"] [data-link="close"] {
@@ -211,5 +224,9 @@ a {
 
 [data-section="detail"] .content {
 	padding: 0 1em;
-	margin-bottom: 3em;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

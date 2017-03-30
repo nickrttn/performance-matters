@@ -28,7 +28,7 @@ app.get('/', (request, response) => {
 });
 
 app.use('/collection', collection);
-app.use('/artwork/', detail);
+app.use('/detail/', detail);
 app.use('/api/', api);
 app.use('/offline/', offline);
 

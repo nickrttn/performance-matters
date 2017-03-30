@@ -7,7 +7,7 @@ const h = require('virtual-dom/h');
  * @param  {[String]} type    [A string describing the type of navigation, previous or next.]
  * @param  {[Number]} page    [The collection page we are on.]
  * @param  {[Function]} handler [Callback for the click handler, only used on the client.]
- * @return [VNode]           [a virtual-dom VNode containing a single pagination nav element]
+ * @return [VNode]            [a virtual-dom VNode containing a single pagination nav element]
  */
 function nav(href, type, page, handler) {
 	const text = type === 'prev' ? 'Previous works of art' : 'More works of art';
@@ -17,7 +17,7 @@ function nav(href, type, page, handler) {
 	},
 		(page <= 1 && type === 'prev') ? '' :
 			h('a', {
-				href: href,
+				href,
 				'ev-click': handler ? handler : null
 			}, h('span', text)
 			)

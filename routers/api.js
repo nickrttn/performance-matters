@@ -12,14 +12,14 @@ const apiKey = process.env.RIJKSMUSEUM_APIKEY;
 router.use(paginate.middleware(10, 100));
 
 router.get('/', collection);
-router.get('/:artwork', detail);
+router.get('/detail', detail);
 
 function detail(request, response) {
-	const id = request.params.artwork;
+	const id = request.query.artwork;
 	const back = request.headers.referer;
 
 	const callback = data => {
-		response.json({object: data.artObject, back});
+		response.json({artObject: data.artObject, back});
 	};
 
 	const url = `${endpoint}/${id}?key=${apiKey}&format=json&imgonly=true`;
