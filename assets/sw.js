@@ -5,7 +5,6 @@ self.addEventListener('install', event => {
 				'/offline',
 				'/collection',
 				'/src/fonts/FiraSans-Light.woff2',
-				'src/fonts/FiraSans-LightItalic.woff2',
 				'src/fonts/FiraSans-SemiBold.woff2',
 				'/src/css/fonts.css',
 				'/build/main.css',
