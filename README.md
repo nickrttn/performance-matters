@@ -15,6 +15,10 @@ This progressive web application enables users to explore the art collection of 
 	- `npm run build`
 	- `npm run build-css`
 	- `npm run build-critical-css`
+	
+4. Create an `.env` file with:
+	- `RIJKSMUSEUM_APIKEY: <your-apikey>`
+	- `RIJKSMUSEUM_ENDPOINT: https://www.rijksmuseum.nl/api/en/collection`
 
 4. Finally, start the server
 	`npm run start`
