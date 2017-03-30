@@ -5,11 +5,11 @@ This progressive web application enables users to explore the art collection of 
 ## Up and running
 
 1. Clone the repo
-	`git clone https://github.com/nickrttn/performance-matters && cd performance-matters`
+	- `git clone https://github.com/nickrttn/performance-matters && cd performance-matters`
 
 
 2. Install the dependencies
-	`npm install`
+	- `npm install`
 
 3. Build the client-side assets
 	- `npm run build`
