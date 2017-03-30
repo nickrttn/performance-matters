@@ -33,6 +33,22 @@ This progressive web application enables users to explore the art collection of 
 
 ![100/100](performance-matters/docs/lighthouse-score.png)
 
+## Webpagetest.org results
+
+
+[Results](https://www.webpagetest.org/result/170330_FP_1EWE/)
+[Results (no javascript)][https://www.webpagetest.org/result/170330_HX_1EZQ/]
+
+## Reflection
+
+First off, I learned a whole damn lot in the past three weeks. I had never written a universal application before, nor a progressive web app. In this application I did it both.
+
+My process could have been better. I did not document my optimizations while building, so I can only test performance at the end. Admittedly, the performance is pretty good, but I sadly have no material for comparison, except for the version of my application where Javascript is disabled.
+
+In addition to that, I should have worked with feature branches. I committed everything to `master`. This of course make it harder to test the application in various set ups and with various optimizations.
+
+What I can say for sure, is that the application *feels* a whole lot faster with client-side rendering. Pages load much snappier, because all that's fetched is a bit of JSON instead of an entire page.
+
 ## License
 
 Licensed under MIT. &copy; Nick Rutten 2017.
