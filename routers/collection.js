@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const paginate = require('express-paginate');
 const toString = require('vdom-to-html');
@@ -27,17 +28,24 @@ router.all((request, response, next) => {
 router.get('/', (request, response) => {
 	const page = request.query.page;
 	const limit = request.query.limit;
-	const url = `${endpoint}?key=${apiKey}&ps=${limit}&p=${page - 1}&format=json&imgonly=true`;
-	const callback = data => {
-		response.type('.html');
-		response.end(`
-			${head}
-			${toString(render(data, response.locals.paginate))}
-			${foot}
-		`);
-	};
 
-	load(url, callback);
+	fs.readFile('assets/critical-css/collection.css', 'utf8', onread);
+
+	function onread(err, criticalCSS) {
+		if (err) throw new Error(err); // eslint-disable-line curly
+
+		const callback = data => {
+			response.type('.html');
+			response.end(`
+				${head(criticalCSS)}
+				${toString(render(data, response.locals.paginate))}
+				${foot}
+			`);
+		};
+
+		const url = `${endpoint}?key=${apiKey}&ps=${limit}&p=${page - 1}&format=json&imgonly=true`;
+		load(url, callback);
+	}
 });
 
 module.exports = router;

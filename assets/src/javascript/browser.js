@@ -20,7 +20,7 @@ const collection = document.querySelector('[data-section="collection"]');
 attachListeners();
 
 function attachListeners() {
-	if (Boolean(collection)) {
+	if (collection) {
 		Array.from(document.links).forEach(link => link.addEventListener('click', onpage));
 	}
 }

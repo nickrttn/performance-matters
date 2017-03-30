@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const toString = require('vdom-to-html');
 
@@ -19,17 +20,23 @@ function artwork(request, response) {
 	const id = request.query.artwork;
 	const collectionURL = request.headers.referer;
 
-	const callback = data => {
-		response.type('.html');
-		response.end(`
-			${head}
-			${toString(render(collectionURL, data.artObject))}
-			${foot}
-		`)
-	};
+	fs.readFile('assets/critical-css/detail.css', 'utf8', onread);
 
-	const url = `${endpoint}/${id}?key=${apiKey}&format=json&imgonly=true`;
-	load(url, callback);
+	function onread(err, criticalCSS) {
+		if (err) throw new Error(err); // eslint-disable-line curly
+
+		const callback = data => {
+			response.type('.html');
+			response.end(`
+				${head(criticalCSS)}
+				${toString(render(collectionURL, data.artObject))}
+				${foot}
+			`);
+		};
+
+		const url = `${endpoint}/${id}?key=${apiKey}&format=json&imgonly=true`;
+		load(url, callback);
+	}
 }
 
 module.exports = router;

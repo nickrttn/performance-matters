@@ -4,9 +4,6 @@ self.addEventListener('install', event => {
 			.then(cache => cache.addAll([
 				'/offline',
 				'/collection',
-				'/src/fonts/FiraSans-Light.woff2',
-				'src/fonts/FiraSans-SemiBold.woff2',
-				'/src/css/fonts.css',
 				'/build/main.css',
 				'/build/browser.js'
 			]))

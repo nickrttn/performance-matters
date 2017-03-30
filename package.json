@@ -10,7 +10,8 @@
     "start-dev": "nodemon server.js",
     "lint": "xo",
     "build-js": "browserify assets/src/javascript/browser.js -t babelify -g uglifyify -o assets/build/browser.js",
-    "build-css": "cleancss -o assets/build/main.css assets/src/css/main.css",
+		"build-css": "cleancss -o assets/build/main.css assets/src/css/main.css",
+    "build-critical-css": "node generate-critical-css.js",
     "watch": "watchify assets/src/javascript/browser.js -t babelify -g uglifyify -o assets/build/browser.js"
   },
   "repository": {
@@ -43,6 +44,7 @@
     "babel-preset-env": "^1.2.2",
     "browserify": "^14.1.0",
     "clean-css-cli": "^4.0.10",
+    "critical": "^0.8.4",
     "uglify-js": "^2.8.16",
     "uglify-to-browserify": "^1.0.2",
     "watchify": "^3.9.0",

@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const compression = require('compression');
 
@@ -19,12 +20,18 @@ app.use(compression());
 app.use(express.static('assets', {maxAge: '31d'}));
 
 app.get('/', (request, response) => {
-	response.type('.html');
-	response.end(`
-		${head}
-		${index}
-		${foot}
-	`);
+	fs.readFile('assets/critical-css/detail.css', 'utf8', onread);
+
+	function onread(err, criticalCSS) {
+		if (err) throw new Error(err); // eslint-disable-line curly
+
+		response.type('.html');
+		response.end(`
+			${head(criticalCSS)}
+			${index}
+			${foot}
+		`);
+	}
 });
 
 app.use('/collection', collection);

@@ -105,7 +105,7 @@ a {
 	padding-bottom: calc((100vh - 6em) / 5);
 	max-width: 50vw;
 	height: 0;
-	background-image: url('../images/placeholder.jpg');
+	background-image: url('../../images/placeholder.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 }
