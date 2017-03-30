@@ -1,5 +1,11 @@
-module.exports = function (data) {
-	if (Object.prototype.hasOwnProperty.call(data, 'artObjects')) {
+/**
+ * [sanitize cleans up API request data before it is stored and sent to the client.]
+ * @param  {[Object]} data [Rijksmuseum API request data]
+ * @return {[Object]}      [Cleaned up Rijksmuseum API request data]
+ */
+function sanitize(data) {
+	const has = {}.hasOwnProperty;
+	if (has.call(data, 'artObjects')) {
 		data.artObjects = data.artObjects.filter(object => object.headerImage);
 		data.artObjects = data.artObjects.map(object => ({
 			id: object.id,
@@ -11,9 +17,10 @@ module.exports = function (data) {
 				guid: object.headerImage.guid
 			}
 		}));
-	} else if (Object.prototype.hasOwnProperty.call(data, 'artObject')) {
+	} else if (has.call(data, 'artObject')) {
 		data.artObject = {
 			id: data.artObject.id,
+			objectNumber: data.artObject.objectNumber,
 			longTitle: data.artObject.longTitle,
 			label: {
 				description: data.artObject.label.description
@@ -27,3 +34,5 @@ module.exports = function (data) {
 
 	return data;
 }
+
+module.exports = sanitize;

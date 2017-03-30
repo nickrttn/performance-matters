@@ -187,3 +187,29 @@ a {
 		transform: rotate(0.25turn);
 	}
 }
+
+[data-section="detail"] {
+}
+
+[data-section="detail"] [data-guid] {
+	/*max-height: 70vh;
+	width: auto;*/
+}
+
+[data-section="detail"] [data-link="close"] {
+	display: block;
+	line-height: 3;
+	padding-left: 1em;
+	background: #222;
+}
+
+[data-section="detail"] h1 {
+	font-size: 2.617924em;
+	max-width: 20em;
+	padding-left: 1rem;
+}
+
+[data-section="detail"] .content {
+	padding: 0 1em;
+	margin-bottom: 3em;
+}

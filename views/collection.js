@@ -18,7 +18,7 @@ function collection(data, paginate) {
 	}, [
 		nav(paginate.href(true), 'prev', paginate.page, false),
 		page(data, paginate.page),
-		nav(paginate.href(), 'next', paginate.page, false),
+		nav(paginate.href(), 'next', paginate.page, false)
 	]);
 }
 

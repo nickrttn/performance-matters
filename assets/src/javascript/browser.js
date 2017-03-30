@@ -1,4 +1,3 @@
-const h = require('virtual-dom/h');
 const diff = require('virtual-dom/diff');
 const patch = require('virtual-dom/patch');
 
@@ -24,13 +23,15 @@ function onpage(event) {
 	load(apiURL.toString(), render);
 
 	function render(response) {
-		if (Object.prototype.hasOwnProperty.call(response, 'artObjects')) {
-			let pageNode = document.querySelector('[data-page]');
+		const has = {}.hasOwnProperty;
+		if (has.call(response, 'artObjects')) {
+			const pageNode = document.querySelector('[data-page]');
 			const newPageNode = page(response, params.get('page'));
-			const patches = diff(pageNode, newPageNode);
-			pageNode = patch(pageNode, patches);
+			patch(pageNode, diff(pageNode, newPageNode));
+
 			changeState(targetHref);
-		} else if (Object.prototype.hasOwnProperty.call(response, 'artObject')) {
+			renderNav(targetHref);
+		} else if (has.call(response, 'artObject')) {
 			console.log(response);
 		}
 	}
@@ -40,14 +41,13 @@ function onpage(event) {
 
 function changeState(href) {
 	history.pushState({}, '', href.toString());
-	renderNav(href);
 }
 
 function renderNav(href) {
 	document.querySelectorAll('[data-paginate]').forEach(node => {
 		const url = new URL(href);
 		const modifier = node.dataset.paginate === 'next' ? 1 : -1;
-		const page = parseInt(url.searchParams.get('page'));
+		const page = parseInt(url.searchParams.get('page'), 10);
 		url.searchParams.set('page', page + modifier);
 
 		const newNode = nav(
@@ -57,7 +57,6 @@ function renderNav(href) {
 			onpage
 		);
 
-		const patches = diff(node, newNode);
-		patch(node, patches);
+		patch(node, diff(node, newNode));
 	});
 }
