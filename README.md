@@ -22,9 +22,17 @@ This progressive web application enables users to explore the art collection of 
 ## Features
 
 - Client-side rendering with [virtual-dom](https://www.npmjs.com/package/virtual-dom)
-- A no-JavaScript server-side rendered fallback.
+- A no-JavaScript server-side rendered fallback
 - Requested data is cached in IndexedDB
 - Request preloading and asset caching in a Service Worker
 - Universal data fetching
 - Universal rendering
 - Universal caching
+
+## Lighthouse score
+
+![100/100](performance-matters/docs/lighthouse-score.png)
+
+## License
+
+Licensed under MIT. &copy; Nick Rutten 2017.
